@@ -3,10 +3,8 @@ import { Routes, Route } from "react-router-dom";
 import Accueil from "./routes/accueil/Accueil";
 import Navigation from "./routes/navigation/Navigation";
 import Profil from "./routes/profil/Profil";
-import Reglages from "./routes/reglage/Reglages";
+import Reglages from "./routes/reglages/Reglages";
 import Communaute from "./routes/communaute/Communaute";
-
-import "./App.scss";
 
 function App() {
   return (

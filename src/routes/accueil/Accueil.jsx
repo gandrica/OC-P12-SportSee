@@ -1,5 +1,7 @@
+import styles from "./Accueil.module.scss";
+
 function Accueil() {
-  return <div></div>;
+  return <div className={styles.accueil}></div>;
 }
 
 export default Accueil;

@@ -1,7 +1,12 @@
+import styles from "./Logo.module.scss";
 function Logo() {
   return (
-    <div className="logo">
-      <img src="./src/assets/crown.svg" className="logo-image" />
+    <div className={styles.logo}>
+      <img
+        src="../../../public/logo.svg"
+        alt="logo"
+        className={styles.logoImage}
+      />
     </div>
   );
 }

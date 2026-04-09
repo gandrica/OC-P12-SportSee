@@ -1,22 +1,23 @@
 import { Link } from "react-router-dom";
 
 import Logo from "../logo/Logo";
+import styles from "./NavBar.module.scss";
 
 function NavBar() {
   return (
-    <div className="navigation">
+    <div className={styles.navBar}>
       <Logo />
-      <div className="nav-links-container">
-        <Link className="nav-link" to="/accueil">
+      <div className={styles.navLinksContainer}>
+        <Link className={styles.navLink} to="/accueil">
           Accueil
         </Link>
-        <Link className="nav-link" to="/profil">
+        <Link className={styles.navLink} to="/profil">
           Profil
         </Link>
-        <Link className="nav-link" to="/reglage">
+        <Link className={styles.navLink} to="/reglage">
           Réglage
         </Link>
-        <Link className="nav-link" to="/communaute">
+        <Link className={styles.navLink} to="/communaute">
           Communauté
         </Link>
       </div>

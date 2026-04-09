@@ -1,0 +1,10 @@
+.navigation {
+  display: grid;
+  grid-template-columns: 117px 1fr;
+  grid-template-rows: 91px 1fr;
+  grid-template-areas:
+    "nav nav"
+    "footer page";
+
+  padding: 18px 26px;
+}

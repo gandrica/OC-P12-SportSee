@@ -1,0 +1,22 @@
+.navBar {
+  grid-area: nav;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 178px 1fr;
+  grid-template-rows: 1fr;
+  grid-column-gap: 60px;
+  align-items: center;
+  .navLinksContainer {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr;
+    justify-items: center;
+    align-items: center;
+    .navLink {
+      color: white;
+      text-decoration: none;
+      font-family: "Roboto", sans-serif;
+      font-size: 24px;
+    }
+  }
+}
