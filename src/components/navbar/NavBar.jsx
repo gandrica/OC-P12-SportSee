@@ -5,7 +5,7 @@ import styles from "./NavBar.module.scss";
 
 function NavBar() {
   return (
-    <div className={styles.navBar}>
+    <nav className={styles.navBar}>
       <Logo />
       <div className={styles.navLinksContainer}>
         <Link className={styles.navLink} to="/accueil">
@@ -21,7 +21,7 @@ function NavBar() {
           Communauté
         </Link>
       </div>
-    </div>
+    </nav>
   );
 }
 

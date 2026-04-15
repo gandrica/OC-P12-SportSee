@@ -5,7 +5,7 @@
   --sans: Roboto, sans-serif;
 
   font: var(--sans);
-  box-sizing: border-box;
+
   letter-spacing: 0.18px;
   color-scheme: light dark;
   color: var(--text);
@@ -14,4 +14,18 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+* {
+  box-sizing: border-box;
+}
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }

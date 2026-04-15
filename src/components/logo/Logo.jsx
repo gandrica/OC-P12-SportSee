@@ -3,7 +3,7 @@ function Logo() {
   return (
     <div className={styles.logo}>
       <img
-        src="../../../public/logo.svg"
+        src="../../../public/assets/logo.svg"
         alt="logo"
         className={styles.logoImage}
       />
