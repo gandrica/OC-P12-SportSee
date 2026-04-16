@@ -4,6 +4,9 @@ import FrontEndApi from "../../api/FrontEndApi";
 import BackEndApi from "../../api/BackEndApi";
 import Utilisateur from "../../models/Utilisateur";
 
+import AccueilHeader from "../../components/accueilHeader/AccueilHeader";
+import KeyData from "../../components/KeyData/KeyData";
+
 import styles from "./Accueil.module.scss";
 
 function Accueil() {
@@ -19,8 +22,7 @@ function Accueil() {
     //Back End Port
     // const portBack = 3000;
 
-    const id = 12;
-
+    let id = 12;
     const getUserApiData = async (port, id, endPoint = "/") => {
       const url = `http://localhost:${port}/user/`;
       if (port === 5173) {
@@ -29,7 +31,7 @@ function Accueil() {
         switch (endPoint) {
           case "/":
             data = await api.getUserData("USER_MAIN_DATA");
-            setUserMainData(data);
+            setUserMainData(data[0]);
             break;
           case "/activity":
             data = await api.getUserData("USER_ACTIVITY");
@@ -77,22 +79,13 @@ function Accueil() {
     // getUserApiData(portBack, id, "/performance");
   }, []);
   console.log(userMainData);
-  console.log(userActivity);
-  console.log(userAverageSessions);
-  console.log(userPerformance);
-
-  //Créer une LocalAPI et une BackendAPI
-  //
-  // const user = new Utilisateur(userData);
+  const { firstName } = userMainData?.userInfos || {};
+  const { calorieCount, carbohydrateCount, lipidCount, proteinCount } =
+    userMainData?.keyData || {};
 
   return (
     <main className={styles.accueil}>
-      <header className={styles.header}>
-        <h1 className={styles.headerTitle}>Bonjour "Thomas"</h1>
-        <p className={styles.headerTexte}>
-          Félicitation! Vous avez explosé vos objectifs hier
-        </p>
-      </header>
+      <AccueilHeader prenom={firstName} />
       <section className={styles.userData}>
         <div className={styles.userCharts}>
           <div></div>
@@ -100,12 +93,12 @@ function Accueil() {
           <div></div>
           <div></div>
         </div>
-        <div className={styles.userInfos}>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
+        <KeyData
+          calorieCount={calorieCount}
+          carbohydrateCount={carbohydrateCount}
+          lipidCount={lipidCount}
+          proteinCount={proteinCount}
+        />
       </section>
     </main>
   );

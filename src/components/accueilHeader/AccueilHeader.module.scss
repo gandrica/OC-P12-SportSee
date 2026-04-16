@@ -1,0 +1,19 @@
+.header {
+  width: fit-content;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .headerTitle {
+    font-size: 48px;
+    margin: 0;
+  }
+  .headerTexte {
+    margin: 0;
+    font-size: 18px;
+  }
+  .firstName {
+    color: red;
+  }
+}
