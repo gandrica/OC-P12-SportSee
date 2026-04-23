@@ -5,9 +5,10 @@ import BackEndApi from "../../api/BackEndApi";
 import Utilisateur from "../../models/Utilisateur";
 
 import AccueilHeader from "../../components/accueilHeader/AccueilHeader";
-import KeyData from "../../components/KeyData/KeyData";
+import KeyData from "../../components/keyData/KeyData";
 
 import styles from "./Accueil.module.scss";
+import TableBoard from "../../components/tableBoard/TableBoard";
 
 function Accueil() {
   const [userMainData, setUserMainData] = useState({});
@@ -22,7 +23,7 @@ function Accueil() {
     //Back End Port
     // const portBack = 3000;
 
-    let id = 12;
+    let id = 18;
     const getUserApiData = async (port, id, endPoint = "/") => {
       const url = `http://localhost:${port}/user/`;
       if (port === 5173) {
@@ -35,15 +36,15 @@ function Accueil() {
             break;
           case "/activity":
             data = await api.getUserData("USER_ACTIVITY");
-            setUserActivity(data);
+            setUserActivity(data[0]);
             break;
           case "/average-sessions":
             data = await api.getUserData("USER_AVERAGE_SESSIONS");
-            setUserAverageSessions(data);
+            setUserAverageSessions(data[0]);
             break;
           case "/performance":
             data = await api.getUserData("USER_PERFORMANCE");
-            setUserPerformance(data);
+            setUserPerformance(data[0]);
             break;
         }
       } else if (port === 3000) {
@@ -78,28 +79,23 @@ function Accueil() {
     // getUserApiData(portBack, id, "/average-sessions");
     // getUserApiData(portBack, id, "/performance");
   }, []);
-  console.log(userMainData);
+
   const { firstName } = userMainData?.userInfos || {};
-  const { calorieCount, carbohydrateCount, lipidCount, proteinCount } =
-    userMainData?.keyData || {};
+  const userActivityData = userActivity?.sessions || [];
+  const userAverageSessionsData = userAverageSessions?.sessions || [];
+  // console.log(userMainData);
+  // console.log(userActivityData);
+  // console.log(userAverageSessionsData);
 
   return (
     <main className={styles.accueil}>
       <AccueilHeader prenom={firstName} />
-      <section className={styles.userData}>
-        <div className={styles.userCharts}>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <KeyData
-          calorieCount={calorieCount}
-          carbohydrateCount={carbohydrateCount}
-          lipidCount={lipidCount}
-          proteinCount={proteinCount}
-        />
-      </section>
+      <TableBoard
+        userMainData={userMainData}
+        userActivityData={userActivityData}
+        userAverageSessionsData={userAverageSessionsData}
+        userPerformanceData={userPerformance}
+      />
     </main>
   );
 }
