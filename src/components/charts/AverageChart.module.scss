@@ -1,4 +1,26 @@
 .averageChart {
-  grid-area: averageChart;
+  position: relative; // Indispensable pour l'overlay
   background-color: #ff0101;
+  border-radius: 5px;
+  overflow: hidden; // Pour que l'overlay ne dépasse pas des bords arrondis
+  grid-area: averageChart;
+  padding: 0;
+
+  .title {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    color: #ffffff67;
+    margin-top: 10%;
+    margin-left: 10%;
+  }
+}
+.chartOverlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  pointer-events: none; // Pour que la souris "passe à travers" vers le graphique
+  z-index: 10;
 }

@@ -1,7 +1,7 @@
 .userCharts {
   width: 835px;
   display: grid;
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-rows: 320px 264px;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 20px;
   grid-template-areas:
