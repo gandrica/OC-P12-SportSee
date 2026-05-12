@@ -7,8 +7,8 @@ function CustomTick({ x, y, payload }) {
 
   // La magie est ici : on décale l'axe X pour le premier et le dernier point
   let xOffset = 0;
-  if (dayValue === 1) xOffset = +15; // On pousse le "L" vers la droite
-  if (dayValue === 7) xOffset = -15; // On pousse le "D" vers la gauche
+  if (dayValue === 1) xOffset = +5; // On pousse le "L" vers la droite
+  if (dayValue === 7) xOffset = -5; // On pousse le "D" vers la gauche
 
   return (
     <text

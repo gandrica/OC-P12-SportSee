@@ -12,10 +12,10 @@ import { RechartsDevtools } from "@recharts/devtools";
 import CustomCursor from "./CustomCursorActivityChart";
 
 import styles from "./ActivityChart.module.scss";
+import CustomLegendAverageChart from "./CustomLegendActivityChart";
 
 function ActivityChart({ userActivityData }) {
-  console.log(userActivityData);
-  const setTickFormatterAcChart = (value) => {
+  const setXTickFormatterAcChart = (value) => {
     let index = 0;
     userActivityData.map((data, i) => {
       if (data["day"] === value) {
@@ -25,16 +25,32 @@ function ActivityChart({ userActivityData }) {
     });
     return index + 1;
   };
+
+  const calcTicksPoids = () => {
+    const arrayPoids = userActivityData.map((data) => data.kilogram);
+    const minPoids = Math.min(...arrayPoids);
+    const maxPoids = Math.max(...arrayPoids);
+
+    let calcMin = minPoids - 1;
+    let calcMax = maxPoids + 1;
+
+    if ((calcMax - calcMin) % 2 !== 0) {
+      calcMax += 1;
+    }
+
+    const calcMid = calcMin + (calcMax - calcMin) / 2;
+
+    const ticksPoids = [calcMin, calcMid, calcMax];
+    return ticksPoids;
+  };
+
+  const ticksPoids = calcTicksPoids();
+  const { calcMin, calcMax } = ticksPoids;
+
   return (
     <div className={styles.barChart}>
       <BarChart
-        style={{
-          width: "100%",
-          height: "100%",
-          padding: "20px",
-          aspectRatio: 1.618,
-          backgroundColor: "#FBFBFB",
-        }}
+        className={styles.barChartContainer}
         responsive
         data={userActivityData}
         margin={{
@@ -49,22 +65,34 @@ function ActivityChart({ userActivityData }) {
           strokeDasharray="3 3"
           vertical={false}
           stroke="#DEDEDE"
+          yAxisId="axePoids"
         />
         <XAxis
           dataKey="day"
           stroke="#9B9EAC"
           tickLine={false}
-          tickFormatter={setTickFormatterAcChart}
+          tickFormatter={setXTickFormatterAcChart}
           tickMargin={16}
+          padding={{ left: -40, right: -40 }}
         />
         <YAxis
+          yAxisId="axePoids"
           dataKey="kilogram"
           tickLine={false}
           axisLine={false}
           stroke="#9B9EAC"
           orientation="right"
           tickMargin={20}
+          tickCount={3}
+          type="number"
+          allowDecimals={false}
+          allowDataOverflow={true}
+          domain={[
+            (dataMin) => Math.round(dataMin - 1),
+            (dataMax) => Math.round(dataMax),
+          ]}
         />
+        <YAxis yAxisId="axeCalories" hide={true} />
         <Tooltip
           cursor={<CustomCursor />}
           content={({ active, payload }) => {
@@ -93,33 +121,20 @@ function ActivityChart({ userActivityData }) {
             );
           }}
         />
-        <Legend
-          verticalAlign="top"
-          align="right"
-          iconType="circle"
-          wrapperStyle={{
-            top: "-10px",
-            right: "10px",
-          }}
-          formatter={(value) => {
-            if (value === "calories") {
-              return "Calories brûlées (kCal)";
-            } else if (value === "kilogram") {
-              return "Poids (kg)";
-            }
-          }}
-        />
+        <Legend verticalAlign="top" content={CustomLegendAverageChart} />
         <Bar
+          yAxisId="axePoids"
           dataKey="kilogram"
-          stackId={1}
+          // stackId={1}
           fill="#282d30"
           radius={[10, 10, 0, 0]}
         />
         <Bar
+          yAxisId="axeCalories"
           dataKey="calories"
           fill="#e60000"
           radius={[10, 10, 0, 0]}
-          stackId={2}
+          // stackId={2}
         />
         <RechartsDevtools />
       </BarChart>

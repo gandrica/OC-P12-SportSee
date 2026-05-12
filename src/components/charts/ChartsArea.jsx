@@ -1,6 +1,6 @@
 import ActivityChart from "./ActivityChart";
 import AverageChart from "./AverageChart";
-import IntensityChart from "./IntensityChart";
+import KindChart from "./KindChart";
 import PerformanceChart from "./PerformanceChart";
 
 import styles from "./ChartsArea.module.scss";
@@ -11,14 +11,15 @@ function ChartsArea({
   userAverageSessionsData,
   userPerformanceData,
 }) {
-  console.log(userActivityData);
-  console.log(userAverageSessionsData);
+  // console.log(userActivityData);
+  // console.log(userAverageSessionsData);
+  // console.log(userPerformanceData);
   return (
     <div className={styles.userCharts}>
       <ActivityChart userActivityData={userActivityData} />
       <AverageChart userAverageSessionsData={userAverageSessionsData} />
-      <IntensityChart />
-      <PerformanceChart />
+      <KindChart userPerformanceData={userPerformanceData} />
+      <PerformanceChart userMainData={userMainData} />
     </div>
   );
 }

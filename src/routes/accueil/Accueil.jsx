@@ -23,7 +23,7 @@ function Accueil() {
     //Back End Port
     // const portBack = 3000;
 
-    let id = 12;
+    let id = 18;
     const getUserApiData = async (port, id, endPoint = "/") => {
       const url = `http://localhost:${port}/user/`;
       if (port === 5173) {
@@ -83,7 +83,11 @@ function Accueil() {
   const { firstName } = userMainData?.userInfos || {};
   const userActivityData = userActivity?.sessions || [];
   const userAverageSessionsData = userAverageSessions?.sessions || [];
-  // console.log(userMainData);
+  const userPerformanceData = [
+    { kind: userPerformance?.kind || [], data: userPerformance?.data || [] },
+  ];
+  const userMainDataData = userMainData || [];
+  console.log(userMainDataData);
   // console.log(userActivityData);
   // console.log(userAverageSessionsData);
 
@@ -94,7 +98,7 @@ function Accueil() {
         userMainData={userMainData}
         userActivityData={userActivityData}
         userAverageSessionsData={userAverageSessionsData}
-        userPerformanceData={userPerformance}
+        userPerformanceData={userPerformanceData}
       />
     </main>
   );
