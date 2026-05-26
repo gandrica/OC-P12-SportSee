@@ -21,8 +21,8 @@ const PerformanceChart = () => {
   return (
     <div
       style={{
-        width: "320px",
-        height: "320px",
+        width: "100%",
+        height: "100%",
         backgroundColor: "#f8f9fa", // Fond de la carte
         borderRadius: "16px",
         padding: "24px",
