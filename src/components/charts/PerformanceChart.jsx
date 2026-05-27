@@ -3,8 +3,7 @@ import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 
 import styles from "./PerformanceChart.module.scss";
 
-function PerformanceChart({ userMainData }) {
-  const score = userMainData?.score * 100 || 0;
+function PerformanceChart({ score }) {
   const data = [
     { name: "Score", value: score },
     { name: "Reste", value: 100 - score },

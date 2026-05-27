@@ -26,27 +26,6 @@ function ActivityChart({ userActivityData }) {
     return index + 1;
   };
 
-  const calcTicksPoids = () => {
-    const arrayPoids = userActivityData.map((data) => data.kilogram);
-    const minPoids = Math.min(...arrayPoids);
-    const maxPoids = Math.max(...arrayPoids);
-
-    let calcMin = minPoids - 1;
-    let calcMax = maxPoids + 1;
-
-    if ((calcMax - calcMin) % 2 !== 0) {
-      calcMax += 1;
-    }
-
-    const calcMid = calcMin + (calcMax - calcMin) / 2;
-
-    const ticksPoids = [calcMin, calcMid, calcMax];
-    return ticksPoids;
-  };
-
-  const ticksPoids = calcTicksPoids();
-  const { calcMin, calcMax } = ticksPoids;
-
   return (
     <div className={styles.barChart}>
       <BarChart

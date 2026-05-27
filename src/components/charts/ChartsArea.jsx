@@ -5,21 +5,13 @@ import PerformanceChart from "./PerformanceChart";
 
 import styles from "./ChartsArea.module.scss";
 
-function ChartsArea({
-  userMainData,
-  userActivityData,
-  userAverageSessionsData,
-  userPerformanceData,
-}) {
-  // console.log(userActivityData);
-  // console.log(userAverageSessionsData);
-  // console.log(userPerformanceData);
+function ChartsArea({ userData }) {
   return (
     <div className={styles.userCharts}>
-      <ActivityChart userActivityData={userActivityData} />
-      <AverageChart userAverageSessionsData={userAverageSessionsData} />
-      <KindChart userPerformanceData={userPerformanceData} />
-      <PerformanceChart userMainData={userMainData} />
+      <ActivityChart userActivityData={userData.activitySessions} />
+      <AverageChart userAverageSessionsData={userData.averageSessions} />
+      <KindChart userPerformanceData={userData.performance} />
+      <PerformanceChart score={userData.score} />
     </div>
   );
 }

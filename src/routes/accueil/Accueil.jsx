@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import FrontEndApi from "../../api/FrontEndApi";
 import BackEndApi from "../../api/BackEndApi";
-import Utilisateur from "../../models/Utilisateur";
+import User from "../../models/User";
 
 import AccueilHeader from "../../components/accueilHeader/AccueilHeader";
 import KeyData from "../../components/keyData/KeyData";
@@ -23,7 +23,7 @@ function Accueil() {
     //Back End Port
     // const portBack = 3000;
 
-    let id = 18;
+    let id = 12;
     const getUserApiData = async (port, id, endPoint = "/") => {
       const url = `http://localhost:${port}/user/`;
       if (port === 5173) {
@@ -79,27 +79,18 @@ function Accueil() {
     // getUserApiData(portBack, id, "/average-sessions");
     // getUserApiData(portBack, id, "/performance");
   }, []);
-
-  const { firstName } = userMainData?.userInfos || {};
-  const userActivityData = userActivity?.sessions || [];
-  const userAverageSessionsData = userAverageSessions?.sessions || [];
-  const userPerformanceData = [
-    { kind: userPerformance?.kind || [], data: userPerformance?.data || [] },
-  ];
-  const userMainDataData = userMainData || [];
-  console.log(userMainDataData);
-  // console.log(userActivityData);
-  // console.log(userAverageSessionsData);
+  const user = new User(
+    userMainData,
+    userActivity,
+    userAverageSessions,
+    userPerformance,
+  );
+  console.log(user);
 
   return (
     <main className={styles.accueil}>
-      <AccueilHeader prenom={firstName} />
-      <TableBoard
-        userMainData={userMainData}
-        userActivityData={userActivityData}
-        userAverageSessionsData={userAverageSessionsData}
-        userPerformanceData={userPerformanceData}
-      />
+      <AccueilHeader prenom={user.firstName} />
+      <TableBoard userData={user} />
     </main>
   );
 }
