@@ -25,7 +25,6 @@ function KindChart({ userPerformanceData }) {
       dataTransfromed[3],
       dataTransfromed[1],
     ];
-    console.log(dataTransfromed);
     return dataTransfromed;
   }
   transformData(userPerformanceData[0]?.data);
