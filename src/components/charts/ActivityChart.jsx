@@ -79,21 +79,7 @@ function ActivityChart({ userActivityData }) {
               return null;
             }
             return (
-              <div
-                style={{
-                  width: "40px",
-                  height: "64px",
-                  marginLeft: "24px",
-                  backgroundColor: "#e60000",
-                  display: "flex",
-                  color: "white",
-                  flexDirection: "column",
-                  justifyContent: "space-around",
-                  alignItems: "center",
-                  fontWeight: "500",
-                  fontSize: "7px",
-                }}
-              >
+              <div className={styles.tooltip}>
                 <div>{payload[0].payload["kilogram"]}kg</div>
                 <div>{payload[0].payload["calories"]}kcal</div>
               </div>
@@ -104,7 +90,6 @@ function ActivityChart({ userActivityData }) {
         <Bar
           yAxisId="axePoids"
           dataKey="kilogram"
-          // stackId={1}
           fill="#282d30"
           radius={[10, 10, 0, 0]}
         />
@@ -113,7 +98,6 @@ function ActivityChart({ userActivityData }) {
           dataKey="calories"
           fill="#e60000"
           radius={[10, 10, 0, 0]}
-          // stackId={2}
         />
         <RechartsDevtools />
       </BarChart>

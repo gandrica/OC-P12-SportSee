@@ -33,7 +33,6 @@ function CustomLegendAverageChart() {
           </span>
         </div>
 
-        {/* ÉLÉMENT 2 : Et les Calories en deuxième (ou inverser les deux blocs !) */}
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
           <div
             style={{

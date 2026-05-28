@@ -18,6 +18,24 @@ class User {
     this._score = (mainData?.score || mainData?.todayScore) * 100 || 0;
   }
 
+  transformData(data) {
+    const dataTransfromed = data.map((item) => {
+      return {
+        value: item.value,
+        kind: this._performance[0]?.kind[item.kind],
+      };
+    });
+    [dataTransfromed[0], dataTransfromed[4]] = [
+      dataTransfromed[4],
+      dataTransfromed[0],
+    ];
+    [dataTransfromed[1], dataTransfromed[3]] = [
+      dataTransfromed[3],
+      dataTransfromed[1],
+    ];
+    return dataTransfromed;
+  }
+
   get firstName() {
     return this._firstName;
   }
@@ -33,7 +51,7 @@ class User {
     return this._averageSessions;
   }
   get performance() {
-    return this._performance;
+    return this.transformData(this._performance[0]?.data);
   }
   get mainData() {
     return this._mainData;

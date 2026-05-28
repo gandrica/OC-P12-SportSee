@@ -6,12 +6,13 @@ import PerformanceChart from "./PerformanceChart";
 import styles from "./ChartsArea.module.scss";
 
 function ChartsArea({ userData }) {
+  const { activitySessions, averageSessions, performance, score } = userData;
   return (
     <div className={styles.userCharts}>
-      <ActivityChart userActivityData={userData.activitySessions} />
-      <AverageChart userAverageSessionsData={userData.averageSessions} />
-      <KindChart userPerformanceData={userData.performance} />
-      <PerformanceChart score={userData.score} />
+      <ActivityChart userActivityData={activitySessions} />
+      <AverageChart userAverageSessionsData={averageSessions} />
+      <KindChart userPerformanceData={performance} />
+      <PerformanceChart score={score} />
     </div>
   );
 }

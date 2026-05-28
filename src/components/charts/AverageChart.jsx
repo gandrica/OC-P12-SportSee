@@ -14,20 +14,15 @@ import styles from "./AverageChart.module.scss";
 import CustomTick from "./CustomTickAverageChart";
 
 function AverageChart({ userAverageSessionsData }) {
-  // 1. On crée un état pour suivre les calories survolées
   const [hoveredDay, setHoveredDay] = useState(null);
 
-  // 2. Fonction appelée quand la souris bouge sur le graphique
   const handleMouseMove = (state) => {
     if (state.isTooltipActive && state.activeLabel) {
-      // state.activeLabel contient la valeur de l'axe X (1, 2, 3...)
       setHoveredDay(state.activeLabel);
     } else {
       setHoveredDay(null);
     }
   };
-
-  // 3. Fonction pour réinitialiser quand la souris sort du graphique
   const handleMouseLeave = () => {
     setHoveredDay(null);
   };
@@ -110,10 +105,10 @@ function AverageChart({ userAverageSessionsData }) {
           stroke="#ffffffba"
           fill="#ff0101"
           activeDot={{
-            fill: "#ffffff", // La couleur du point central (blanc)
-            r: 4, // Le rayon (la taille) du point
-            stroke: "rgba(255, 255, 255, 0.3)", // La couleur de l'ombre (blanc avec 30% d'opacité)
-            strokeWidth: 10, // L'épaisseur de l'ombre autour du point
+            fill: "#ffffff",
+            r: 4,
+            stroke: "rgba(255, 255, 255, 0.3)",
+            strokeWidth: 10,
           }}
         />
         <RechartsDevtools />

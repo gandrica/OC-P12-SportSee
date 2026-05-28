@@ -10,33 +10,13 @@ import { RechartsDevtools } from "@recharts/devtools";
 import styles from "./KindChart.module.scss";
 
 function KindChart({ userPerformanceData }) {
-  function transformData(data) {
-    const dataTransfromed = data.map((item) => {
-      return {
-        value: item.value,
-        kind: userPerformanceData[0]?.kind[item.kind],
-      };
-    });
-    [dataTransfromed[0], dataTransfromed[4]] = [
-      dataTransfromed[4],
-      dataTransfromed[0],
-    ];
-    [dataTransfromed[1], dataTransfromed[3]] = [
-      dataTransfromed[3],
-      dataTransfromed[1],
-    ];
-    return dataTransfromed;
-  }
-  transformData(userPerformanceData[0]?.data);
-  const data = transformData(userPerformanceData[0]?.data);
-
   return (
     <div className={styles.intensityChart}>
       <RadarChart
         className={styles.radarChart}
         responsive
         outerRadius="70%"
-        data={data}
+        data={userPerformanceData}
         startAngle={30}
         endAngle={-330}
       >
@@ -45,9 +25,9 @@ function KindChart({ userPerformanceData }) {
         <PolarAngleAxis
           dataKey="kind"
           tick={{
-            fill: "#fff", // Change la couleur du texte (hex, rgb, ou nom de couleur)
-            fontSize: 12, // Optionnel : modifie la taille
-            fontWeight: "bold", // Optionnel : met en gras
+            fill: "#fff",
+            fontSize: 12,
+            fontWeight: "bold",
           }}
           tickFormatter={(value) => {
             if (value === "intensity") return "Intensité";
