@@ -1,0 +1,29 @@
+.containerServiceIndisponible {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f9fa;
+  color: #2c3e50;
+  text-align: center;
+  padding: 20px;
+
+  .titleServiceIndisponible {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .descriptionServiceIndisponible {
+    font-size: 1.2rem;
+    color: #7f8c8d;
+  }
+  .buttonServiceIndisponible {
+    margin-top: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+}

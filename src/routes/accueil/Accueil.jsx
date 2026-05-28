@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import FrontEndApi from "../../api/FrontEndApi";
 import BackEndApi from "../../api/BackEndApi";
@@ -16,16 +17,19 @@ function Accueil() {
   const [userAverageSessions, setUserAverageSessions] = useState({});
   const [userPerformance, setUserPerformance] = useState({});
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     //Front End Port
-    const portFront = 5173;
+    // const portFront = 5173;
 
     //Back End Port
-    // const portBack = 3000;
+    const portBack = 3000;
 
     let id = 12;
     const getUserApiData = async (port, id, endPoint = "/") => {
       const url = `http://localhost:${port}/user/`;
+
       if (port === 5173) {
         const api = new FrontEndApi(`${url}${id}${endPoint}`);
         let data = null;
@@ -48,44 +52,48 @@ function Accueil() {
             break;
         }
       } else if (port === 3000) {
-        const api = new BackEndApi(`${url}${id}${endPoint}`);
-        const data = await api.getData();
-        switch (endPoint) {
-          case "/":
-            setUserMainData(data.data);
-            break;
-          case "/activity":
-            setUserActivity(data.data);
-            break;
-          case "/average-sessions":
-            setUserAverageSessions(data.data);
-            break;
-          case "/performance":
-            setUserPerformance(data.data);
-            break;
+        try {
+          const api = new BackEndApi(`${url}${id}${endPoint}`);
+          const data = await api.getData();
+          switch (endPoint) {
+            case "/":
+              setUserMainData(data.data);
+              break;
+            case "/activity":
+              setUserActivity(data.data);
+              break;
+            case "/average-sessions":
+              setUserAverageSessions(data.data);
+              break;
+            case "/performance":
+              setUserPerformance(data.data);
+              break;
+          }
+        } catch (error) {
+          console.error("Erreur lors de la récupération des données :", error);
+          navigate("/service-indisponible");
         }
       }
     };
 
     //Appel API FRONT
-    getUserApiData(portFront, id);
-    getUserApiData(portFront, id, "/activity");
-    getUserApiData(portFront, id, "/average-sessions");
-    getUserApiData(portFront, id, "/performance");
+    // getUserApiData(portFront, id);
+    // getUserApiData(portFront, id, "/activity");
+    // getUserApiData(portFront, id, "/average-sessions");
+    // getUserApiData(portFront, id, "/performance");
 
     //Appel API BACK
-    // getUserApiData(portBack, id);
-    // getUserApiData(portBack, id, "/activity");
-    // getUserApiData(portBack, id, "/average-sessions");
-    // getUserApiData(portBack, id, "/performance");
-  }, []);
+    getUserApiData(portBack, id);
+    getUserApiData(portBack, id, "/activity");
+    getUserApiData(portBack, id, "/average-sessions");
+    getUserApiData(portBack, id, "/performance");
+  }, [navigate]);
   const user = new User(
     userMainData,
     userActivity,
     userAverageSessions,
     userPerformance,
   );
-  console.log(user);
 
   return (
     <main className={styles.accueil}>

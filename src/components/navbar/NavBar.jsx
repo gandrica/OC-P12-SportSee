@@ -8,16 +8,16 @@ function NavBar() {
     <nav className={styles.navBar}>
       <Logo />
       <div className={styles.navLinksContainer}>
-        <Link className={styles.navLink} to="/accueil">
+        <Link className={styles.navLink} to="/">
           Accueil
         </Link>
-        <Link className={styles.navLink} to="/profil">
+        <Link className={styles.navLink} to="/">
           Profil
         </Link>
-        <Link className={styles.navLink} to="/reglage">
+        <Link className={styles.navLink} to="/">
           Réglage
         </Link>
-        <Link className={styles.navLink} to="/communaute">
+        <Link className={styles.navLink} to="/">
           Communauté
         </Link>
       </div>
