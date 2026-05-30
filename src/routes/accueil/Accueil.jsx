@@ -21,10 +21,12 @@ function Accueil() {
 
   useEffect(() => {
     //Front End Port
-    // const portFront = 5173;
+    const portFront = 5173;
 
     //Back End Port
     const portBack = 3000;
+
+    const isBackEndAvailable = true;
 
     let id = 12;
     const getUserApiData = async (port, id, endPoint = "/") => {
@@ -76,17 +78,21 @@ function Accueil() {
       }
     };
 
-    //Appel API FRONT
-    // getUserApiData(portFront, id);
-    // getUserApiData(portFront, id, "/activity");
-    // getUserApiData(portFront, id, "/average-sessions");
-    // getUserApiData(portFront, id, "/performance");
-
-    //Appel API BACK
-    getUserApiData(portBack, id);
-    getUserApiData(portBack, id, "/activity");
-    getUserApiData(portBack, id, "/average-sessions");
-    getUserApiData(portBack, id, "/performance");
+    if (isBackEndAvailable) {
+      //Appel API BACK
+      getUserApiData(portBack, id);
+      getUserApiData(portBack, id, "/activity");
+      getUserApiData(portBack, id, "/average-sessions");
+      getUserApiData(portBack, id, "/performance");
+    } else if (!isBackEndAvailable) {
+      //Appel API FRONT
+      getUserApiData(portFront, id);
+      getUserApiData(portFront, id, "/activity");
+      getUserApiData(portFront, id, "/average-sessions");
+      getUserApiData(portFront, id, "/performance");
+    } else {
+      throw new Error("Aucune API n'est disponible");
+    }
   }, [navigate]);
   const user = new User(
     userMainData,
