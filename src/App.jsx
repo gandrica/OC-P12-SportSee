@@ -17,7 +17,7 @@ function App() {
 
   useEffect(() => {
     const handleResize = () => {
-      const isInvalid = window.innerWidth <= 1024 || window.innerHeight <= 780;
+      const isInvalid = window.innerWidth <= 1023 || window.innerHeight <= 779;
 
       if (isInvalid) {
         setHasValidResolution(false);
