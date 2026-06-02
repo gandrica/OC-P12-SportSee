@@ -11,16 +11,21 @@ import PageNotFound from "./routes/notFound/PageNotFound";
 import ServiceIndisponible from "./routes/serviceIndisponible/ServiceIndisponible";
 
 function App() {
-  const [hasValidResolution, setHasValidResolution] = useState(
-    window.innerWidth >= 1024 && window.innerHeight >= 780,
-  );
+  const [hasValidResolution, setHasValidResolution] = useState(() => {
+    return !(window.innerWidth <= 1024 || window.innerHeight <= 780);
+  });
 
   useEffect(() => {
     const handleResize = () => {
-      setHasValidResolution(
-        window.innerWidth >= 1024 && window.innerHeight >= 780,
-      );
+      const isInvalid = window.innerWidth <= 1024 || window.innerHeight <= 780;
+
+      if (isInvalid) {
+        setHasValidResolution(false);
+      } else {
+        setHasValidResolution(true);
+      }
     };
+
     window.addEventListener("resize", handleResize);
 
     return () => {

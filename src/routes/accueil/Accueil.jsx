@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import FrontEndApi from "../../api/FrontEndApi";
-import BackEndApi from "../../api/BackEndApi";
-import User from "../../models/User";
+import { getUserData } from "../../api/Api";
 
 import AccueilHeader from "../../components/accueilHeader/AccueilHeader";
 import KeyData from "../../components/keyData/KeyData";
@@ -12,99 +10,25 @@ import styles from "./Accueil.module.scss";
 import TableBoard from "../../components/tableBoard/TableBoard";
 
 function Accueil() {
-  const [userMainData, setUserMainData] = useState({});
-  const [userActivity, setUserActivity] = useState({});
-  const [userAverageSessions, setUserAverageSessions] = useState({});
-  const [userPerformance, setUserPerformance] = useState({});
-
+  const [user, setUser] = useState([]);
   const navigate = useNavigate();
-
   useEffect(() => {
-    //Front End Port
-    const portFront = 5173;
-
-    //Back End Port
-    const portBack = 3000;
-
-    const isBackEndAvailable = true;
-
     let id = 12;
-    const getUserApiData = async (port, id, endPoint = "/") => {
-      const url = `http://localhost:${port}/user/`;
-
-      if (port === 5173) {
-        const api = new FrontEndApi(`${url}${id}${endPoint}`);
-        let data = null;
-        switch (endPoint) {
-          case "/":
-            data = await api.getUserData("USER_MAIN_DATA");
-            setUserMainData(data[0]);
-            break;
-          case "/activity":
-            data = await api.getUserData("USER_ACTIVITY");
-            setUserActivity(data[0]);
-            break;
-          case "/average-sessions":
-            data = await api.getUserData("USER_AVERAGE_SESSIONS");
-            setUserAverageSessions(data[0]);
-            break;
-          case "/performance":
-            data = await api.getUserData("USER_PERFORMANCE");
-            setUserPerformance(data[0]);
-            break;
-        }
-      } else if (port === 3000) {
-        try {
-          const api = new BackEndApi(`${url}${id}${endPoint}`);
-          const data = await api.getData();
-          switch (endPoint) {
-            case "/":
-              setUserMainData(data.data);
-              break;
-            case "/activity":
-              setUserActivity(data.data);
-              break;
-            case "/average-sessions":
-              setUserAverageSessions(data.data);
-              break;
-            case "/performance":
-              setUserPerformance(data.data);
-              break;
-          }
-        } catch (error) {
-          console.error("Erreur lors de la récupération des données :", error);
-          navigate("/service-indisponible");
-        }
+    const fetchUser = async () => {
+      const userData = await getUserData(id);
+      setUser(userData);
+      console.log("Requête terminée avec :", userData);
+      if (!userData.firstName) {
+        navigate("/service-indisponible");
       }
     };
-
-    if (isBackEndAvailable) {
-      //Appel API BACK
-      getUserApiData(portBack, id);
-      getUserApiData(portBack, id, "/activity");
-      getUserApiData(portBack, id, "/average-sessions");
-      getUserApiData(portBack, id, "/performance");
-    } else if (!isBackEndAvailable) {
-      //Appel API FRONT
-      getUserApiData(portFront, id);
-      getUserApiData(portFront, id, "/activity");
-      getUserApiData(portFront, id, "/average-sessions");
-      getUserApiData(portFront, id, "/performance");
-    } else {
-      throw new Error("Aucune API n'est disponible");
-    }
+    fetchUser();
   }, [navigate]);
-  const user = new User(
-    userMainData,
-    userActivity,
-    userAverageSessions,
-    userPerformance,
-  );
-
+  console.log(user);
   return (
     <main className={styles.accueil}>
-      <AccueilHeader prenom={user.firstName} />
-      <TableBoard userData={user} />
+      <AccueilHeader prenom={user.firstName || ""} />
+      <TableBoard userData={user || []} />
     </main>
   );
 }

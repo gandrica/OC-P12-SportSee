@@ -11,7 +11,7 @@ class BackEndApi {
     try {
       const res = await fetch(this._url);
       const data = await res.json();
-      return data;
+      return data.data;
     } catch (err) {
       console.log("an error occurs", err);
     }

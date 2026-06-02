@@ -5,8 +5,8 @@ import styles from "./TableBoard.module.scss";
 function TableBoard({ userData }) {
   return (
     <section className={styles.userTableBoard}>
-      <ChartsArea userData={userData} />
-      <KeyData keyData={userData.keyData} />
+      <ChartsArea userData={userData || []} />
+      <KeyData keyData={userData.keyData || []} />
     </section>
   );
 }
