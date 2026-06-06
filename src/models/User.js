@@ -19,7 +19,6 @@ class User {
   }
 
   transformData(data) {
-    console.log(data);
     const dataTransfromed = data.map((item) => {
       return {
         value: item.value,

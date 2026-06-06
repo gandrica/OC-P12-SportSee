@@ -14,7 +14,7 @@ import CustomCursor from "./CustomCursorActivityChart";
 import styles from "./ActivityChart.module.scss";
 import CustomLegendAverageChart from "./CustomLegendActivityChart";
 
-function ActivityChart({ userActivityData }) {
+function ActivityChart({ userActivityData, screen }) {
   const setXTickFormatterAcChart = (value) => {
     let index = 0;
     userActivityData.map((data, i) => {
@@ -52,7 +52,7 @@ function ActivityChart({ userActivityData }) {
           tickLine={false}
           tickFormatter={setXTickFormatterAcChart}
           tickMargin={16}
-          padding={{ left: -40, right: -40 }}
+          padding={{ left: screen === "large" ? -36 : -26, right: -40 }}
         />
         <YAxis
           yAxisId="axePoids"

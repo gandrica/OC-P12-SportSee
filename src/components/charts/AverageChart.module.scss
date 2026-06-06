@@ -13,6 +13,9 @@
     color: #ffffff67;
     margin-top: 10%;
     margin-left: 10%;
+    @media (max-width: 1172px) {
+      font-size: 12px;
+    }
   }
 }
 .chartOverlay {

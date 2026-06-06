@@ -17,14 +17,12 @@ function Accueil() {
     const fetchUser = async () => {
       const userData = await getUserData(id);
       setUser(userData);
-      console.log("Requête terminée avec :", userData);
       if (!userData.firstName) {
         navigate("/service-indisponible");
       }
     };
     fetchUser();
   }, [navigate]);
-  console.log(user);
   return (
     <main className={styles.accueil}>
       <AccueilHeader prenom={user.firstName || ""} />

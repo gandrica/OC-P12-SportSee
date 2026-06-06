@@ -4,10 +4,13 @@
     font-family: "Roboto", sans-serif;
     width: 100%;
     height: 100%;
-    max-width: "500px";
-    max-height: "80vh";
     color: #fff;
     background-color: #282d30;
     aspect-ratio: 1;
+    border-radius: 5px;
+    @media (max-width: 1172px) {
+      width: 100%;
+      height: 100%;
+    }
   }
 }

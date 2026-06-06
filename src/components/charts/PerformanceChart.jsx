@@ -3,7 +3,12 @@ import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 
 import styles from "./PerformanceChart.module.scss";
 
-function PerformanceChart({ score }) {
+function PerformanceChart({ score, screen }) {
+  const currentInnerRadius =
+    screen === "large" ? 76 : screen === "medium" ? 60 : 54;
+  const currentOuterRadius =
+    screen === "large" ? 88 : screen === "medium" ? 70 : 64;
+
   const data = [
     { name: "Score", value: score },
     { name: "Reste", value: 100 - score },
@@ -28,8 +33,8 @@ function PerformanceChart({ score }) {
               data={data}
               cx="50%"
               cy="50%"
-              innerRadius={76}
-              outerRadius={88}
+              innerRadius={currentInnerRadius}
+              outerRadius={currentOuterRadius}
               startAngle={90}
               endAngle={450}
               dataKey="value"

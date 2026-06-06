@@ -1,9 +1,10 @@
 .userCharts {
-  width: 835px;
+  width: 70%;
   display: grid;
-  grid-template-rows: 320px 264px;
+  grid-template-rows: 54% 36%;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 20px;
+  grid-row-gap: 10%;
+  grid-column-gap: 2%;
   grid-template-areas:
     "activityChart activityChart activityChart"
     "averageChart intensityChart performanceChart";

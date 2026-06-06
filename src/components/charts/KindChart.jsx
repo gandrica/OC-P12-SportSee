@@ -9,7 +9,7 @@ import { RechartsDevtools } from "@recharts/devtools";
 
 import styles from "./KindChart.module.scss";
 
-function KindChart({ userPerformanceData }) {
+function KindChart({ userPerformanceData, screen }) {
   return (
     <div className={styles.intensityChart}>
       <RadarChart
@@ -26,7 +26,7 @@ function KindChart({ userPerformanceData }) {
           dataKey="kind"
           tick={{
             fill: "#fff",
-            fontSize: 12,
+            fontSize: screen === "large" ? 12 : screen === "medium" ? 10 : 8,
             fontWeight: "bold",
           }}
           tickFormatter={(value) => {

@@ -12,12 +12,18 @@ import ServiceIndisponible from "./routes/serviceIndisponible/ServiceIndisponibl
 
 function App() {
   const [hasValidResolution, setHasValidResolution] = useState(() => {
-    return !(window.innerWidth <= 1024 || window.innerHeight <= 780);
+    return !(
+      document.documentElement.clientWidth <= 1023 ||
+      document.documentElement.clientHeight <= 779
+    );
   });
 
   useEffect(() => {
     const handleResize = () => {
-      const isInvalid = window.innerWidth <= 1023 || window.innerHeight <= 779;
+      const width = document.documentElement.clientWidth;
+      const height = document.documentElement.clientHeight;
+
+      const isInvalid = width <= 1023 || height <= 779;
 
       if (isInvalid) {
         setHasValidResolution(false);
